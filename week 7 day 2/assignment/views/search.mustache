@@ -1,0 +1,18 @@
+<html>
+<head></head>
+<body>
+<h1>Search for a Trip</h1>
+
+<form method = 'POST' action = '/search'>
+<input type="text" placeholder="City name" name="citySearchBox" />
+<button>Search</button>
+</form>
+{{#allTrips}}
+<div><img src="{{image}}" width="30%">{{title}} - {{city}} - Departure Date: {{departureDate}} - Return Date: {{returnDate}}
+<form method='GET' action = '/update-trip/{{tripId}}'><button>Update Trip</button></form>
+</div>
+{{/allTrips}}
+
+
+</body>
+</html>
