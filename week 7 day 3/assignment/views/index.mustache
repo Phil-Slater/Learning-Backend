@@ -1,0 +1,23 @@
+<html>
+<head>
+</head>
+<body>
+<h1>My Movie Collection</h1>
+<div>
+<form method = 'GET' action = '/movies/create'>
+<button>Add a Movie</button>
+</form>
+<form method = 'GET' action = '/movies/genre'><button>Search for a movie by genre</button></form>
+<form method='GET' action='/movies/api'><button>Show movies API</button></form>
+</div>
+{{#allMovies}}
+<div><img src="{{posterURL}}" width="20%">
+<form method='GET' action='/movies/details/{{movieId}}'><button>Show Details</button></form>
+
+</div>
+{{/allMovies}}
+{{^allMovies}}
+There are no movies.
+{{/allMovies}}
+</body>
+</html>

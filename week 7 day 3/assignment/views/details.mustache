@@ -1,0 +1,14 @@
+<html>
+<head></head>
+<body>
+<h1>{{title}}</h1>
+<h2>Genre: {{genre}}</h2>
+<img src="{{posterURL}}" alt="{{title}} poster" width="30%">
+<p>{{description}}</p>
+<form method='POST' action='/movies/delete-movie'>
+<input type="hidden" value="{{movieId}}" name="movieId" />
+<button>Delete</button>
+</form>
+<form method='GET' action='/movies'><button>Go back</button></form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<html>
+<head></head>
+<body>
+<h1>Add a Movie</h1>
+
+<form method = 'POST' action = '/movies/create' enctype="multipart/form-data">
+<input type="text" placeholder="Movie Title" name="title" />
+<input type="text" placeholder="Movie Description" name="description" />
+<input type="text" placeholder="Genre" name="genre" />
+<input type="text" placeholder="Poster Image" name="posterURL" />
+<label for="imageUpload">Upload movie poster:</label>
+<input type="file" name="image" id="imageUpload" />
+<button>Submit</button>
+</form>
+</body>
+</html>

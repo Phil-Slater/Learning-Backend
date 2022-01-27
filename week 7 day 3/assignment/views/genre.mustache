@@ -1,0 +1,16 @@
+<html>
+<head></head>
+<body>
+<h1>Search for a Movie by Genre</h1>
+<form method='POST' action='/movies/genre'>
+<input type="text" placeholder="Enter genre (case sensitive)" name="genreSearchBox" />
+<button>Submit</button>
+</form>
+{{#allMovies}}
+<h1>{{title}}</h1>
+<img src="{{posterURL}}" alt="{{title}} poster" width="20%">
+<form method='GET' action='/movies/details/{{movieId}}'><button>Show Details</button></form>
+{{/allMovies}}
+<form method='GET' action ='/movies/'><button>Go back</button></form>
+</body>
+</html>
