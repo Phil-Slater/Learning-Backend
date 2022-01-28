@@ -1,26 +1,32 @@
 const express = require('express')
 const router = express.Router()
+const authenticateMiddleware = require('../authenticate')
 
-
-router.get('/view-trips', (req, res) => {
-    res.render('view-trips', { allTrips: trips })
+router.get('/view-trips', authenticateMiddleware, (req, res) => {
+    let userTrips = trips.filter(trip => trip.username == req.session.username)
+    res.render('view-trips', { allTrips: userTrips })
 })
 
-// now points to trips/
 router.get('/', (req, res) => {
-    res.render('index')
+    res.redirect('/users')
 })
-// localhost:3000/trips/add-trip
-router.get('/add-trip', (req, res) => {
+
+router.get('/add-trip', authenticateMiddleware, (req, res) => {
     res.render('add-trip')
 })
 
-// getting default values for input boxes on update-trip page
-// localhost:3000/trips/add-trip/update-trip/:tripId
 router.get('/update-trip/:tripId', (req, res) => {
     const id = parseInt(req.params.tripId)
-    let trip = trips.find(trip => trip.tripId == id)
-    res.render('update-trip', trip)
+    if (req.session) {
+        if (trips.find(trip => trip.username == req.session.username && trip.tripId == id)) {
+            let trip = trips.find(trip => trip.tripId == id)
+            res.render('update-trip', trip)
+        } else {
+            res.redirect('/users/login')
+        }
+    } else {
+        res.redirect('/users/login')
+    }
 })
 
 router.post('/update-trip/:tripId', (req, res) => {
@@ -39,14 +45,13 @@ router.post('/update-trip/:tripId', (req, res) => {
     res.redirect('/trips/view-trips')
 })
 
-
 router.post('/add-trip', (req, res) => {
     const tripTitle = req.body.tripTitle
     const imageURL = req.body.imageURL
     const city = req.body.city
     const departureDate = req.body.departureDate
     const returnDate = req.body.returnDate
-    const trip = { title: tripTitle, image: imageURL, city: city, departureDate: departureDate, returnDate, returnDate, tripId: trips.length + 1 }
+    const trip = { title: tripTitle, image: imageURL, city: city, departureDate: departureDate, returnDate, returnDate, tripId: trips.length + 1, username: req.session.username }
     trips.push(trip)
     res.redirect('/trips/view-trips')
 })
@@ -58,25 +63,22 @@ router.post('/view-trips', (req, res) => {
     res.render('view-trips', { allTrips: tripsSorted })
 })
 
-router.get('/search', (req, res) => {
+router.get('/search', authenticateMiddleware, (req, res) => {
     res.render('search')
 })
 
 router.post('/search', (req, res) => {
     const citySearched = req.body.citySearchBox
-    const trip = trips.filter(trip => trip.city == citySearched)
+    const username = req.session.username
+    const trip = trips.filter(trip => trip.city == citySearched && trip.username == username)
     res.render('search', { allTrips: trip })
 })
 
 router.post('/delete-trip', (req, res) => {
     const id = req.body.tripId
     trips = trips.filter(trip => trip.tripId != id)
+    console.log(trips)
     res.redirect('/trips/view-trips')
 })
 
-router.get('/:city', (req, res) => {
-    res.send(`<h1 style="text-transform:capitalize">${req.params.city}</h1>`)
-})
-
-//now other files can import router
 module.exports = router
