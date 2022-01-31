@@ -1,0 +1,18 @@
+<html>
+<head>
+<link rel = "stylesheet" href = "/css/styles.css" /></head>
+<body>
+<h1>Your Blog</h1>
+{{#userPosts}}
+<h2>{{post_title}}</h2>
+<h4>{{post_body}}</h4>
+<p>Created at: {{date_created}}</p>
+<p>Last updated: {{date_updated}}</p>
+<form method="GET" action="/users/update-blog-post/{{post_id}}"><button>Update Post</button></form>
+<form method="POST" action="/users/delete-blog-post/{{post_id}}">
+<input type="hidden" value="{{post_id}}" name="post_id" />
+<button>Delete Post</button>
+</form>
+{{/userPosts}}
+</body>
+</html>

@@ -1,0 +1,16 @@
+<html>
+<head></head>
+<body>
+<h1>Update your Blog Post</h1>
+
+{{post_id}}
+{{username}}
+
+<form method = 'POST' action = "/users/update-blog-post/{{post_id}}">
+<div><input type="text" value="{{post_title}}" name="postTitle" /></div><br>
+<textarea placeholder="Tell us about your recent trip!" name="postBody" rows="6" cols="50">{{post_body}}</textarea>
+<div><button>Submit</button></div>
+</form>
+
+</body>
+</html>
