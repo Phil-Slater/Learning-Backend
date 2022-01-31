@@ -10,6 +10,14 @@ router.get('/profile', authenticateMiddleware, (req, res) => {
     res.render('profile')
 })
 
+router.get('/chat', authenticateMiddleware, (req, res) => {
+    console.log(chatMessages)
+    const username = req.session.username
+    const user = { username: username }
+    chatUsers.push(user)
+    res.render('chat', { username: username, allMessages: chatMessages, chatUsers: chatUsers })
+})
+
 router.get('/login', (req, res) => {
     res.render('login')
 })

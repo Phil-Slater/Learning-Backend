@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head></head>
+
+<body>
+    <h1>Chat</h1>
+    <h2>Signed in as {{username}}</h2>
+    <input type="text" id="chatTextBox"/>
+    <input type="hidden" value="{{username}}" id="username" />
+    <button id="sendMessageBtn">Send</button>
+    <h3 id="currentUsers"></h3>
+    <ul id="messagesUL">
+    {{#allMessages}}
+    <li>{{username}}: {{message}}</li>
+    {{/allMessages}}
+    </ul>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io()
+    </script>
+    <script src="/js/client.js"></script>
+</body>
+
+</html>
