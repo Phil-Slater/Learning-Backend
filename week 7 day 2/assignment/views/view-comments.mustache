@@ -1,0 +1,19 @@
+<html>
+<head>
+<link rel = "stylesheet" href = "/css/styles.css" /></head>
+<body>
+<h1>Post Comments</h1>
+<hr>
+{{#allComments}}
+<p><b>{{username}} says:</b></p>
+<p>{{comment_body}}</p>
+<p>Posted at: {{date_created}}</p>
+<form method="POST" action="/users/blog/delete-comment/{{comment_id}}">
+<input type="hidden" name="{{comment_id}}" />
+<button>Delete Comment</button>
+</form>
+<hr>
+{{/allComments}}
+<br>
+</body>
+</html>

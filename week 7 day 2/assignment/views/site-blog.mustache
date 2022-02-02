@@ -1,0 +1,22 @@
+<html>
+<head>
+<link rel = "stylesheet" href = "/css/styles.css" /></head>
+<body>
+<h1>All Blog Posts</h1>
+<form method="GET" action="/users/site-blog/sort-posts-by-comments"><button>Sort Posts by Number of Comments</button></form>
+<form method="GET" action="/users/site-blog/sort-posts-by-date"><button>Sort Posts by Last Updated (newest first)</button></form>
+{{#allPosts}}
+<h2>{{post_title}}</h2>
+<h4>{{post_body}}</h4>
+<p>Created at: {{date_created}}</p>
+<p>Last updated: {{date_updated}}</p>
+<form method="POST" action="/users/site-blog/add-comment/{{post_id}}">
+<input type="textarea" name="commentText" />
+<button>Add Comment</button>
+</form>
+<form method="GET" action="/users/site-blog/show-comments/{{post_id}}">
+<button>Show Details and Comments</button>
+</form>
+{{/allPosts}}
+</body>
+</html>

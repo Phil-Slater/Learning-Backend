@@ -13,6 +13,9 @@
 <input type="hidden" value="{{post_id}}" name="post_id" />
 <button>Delete Post</button>
 </form>
+<form method="GET" action="/users/blog/view-comments/{{post_id}}">
+<button>View or Delete Post Comments</button>
+</form>
 {{/userPosts}}
 </body>
 </html>

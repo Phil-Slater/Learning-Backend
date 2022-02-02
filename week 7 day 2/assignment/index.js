@@ -1,5 +1,7 @@
 const express = require('express')
 const app = express()
+const bcrypt = require('bcryptjs')
+
 
 const pgp = require('pg-promise')()
 const connectionString = 'postgres://vrekubag:2U8un4bq1OxQDxkauXWYsp7G3c2ZKuqs@castor.db.elephantsql.com/vrekubag'

@@ -1,0 +1,28 @@
+<html>
+<head>
+<link rel = "stylesheet" href = "/css/styles.css" /></head>
+<body>
+<h1>Post Details</h1>
+{{#post}}
+<h2>Post title: {{post_title}}</h2>
+<h4>{{post_body}}</h4>
+<p>Date posted: {{date_created}}</p>
+<p>Last updated: {{date_updated}}</p>
+<h3>Submitted by: {{username}}</h3>
+<br>
+<h3>Total comments: {{allComments.length}}</h3>
+<hr>
+{{#allComments}}
+<p><b>{{commenterusername}} says:</b></p>
+<p>{{comment_body}}</p>
+<p>Posted at: {{date_created}}</p>
+<hr>
+{{/allComments}}
+<br>
+<form method="POST" action="/users/site-blog/add-comment/{{post_id}}">
+<input type="textarea" name="commentText" />
+<button>Add Comment</button>
+</form>
+{{/post}}
+</body>
+</html>
