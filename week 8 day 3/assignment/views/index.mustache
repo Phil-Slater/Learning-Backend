@@ -1,0 +1,31 @@
+<html>
+<head></head>
+<body>
+<h1>Welcome to Our Blog</h1>
+<form method="GET" action="/create-post">
+<button>Create a Post</button>
+</form>
+<form method="GET" action="/view-all-posts">
+<button>View All Posts</button>
+</form>
+
+<form method="POST" action="/filter-posts">
+<input type="text" name="keyword" />
+<button>Filter Posts by Category</button>
+</form>
+
+{{#allPosts}}
+<h3>Title: {{title}}</h3>
+<h4>Category: {{category}}</h4>
+<p>{{body}}</p>
+<p>Last updated: {{updatedAt}}</p>
+<p>Date created: {{createdAt}}</p>
+<form method="GET" action="/update-post/{{id}}">
+<button>Update Post</button>
+</form>
+<form method="GET" action="/delete-post/{{id}}">
+<button>Delete Post</button>
+</form>
+{{/allPosts}}
+</body>
+</html>

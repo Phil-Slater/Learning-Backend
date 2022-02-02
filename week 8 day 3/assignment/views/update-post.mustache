@@ -1,0 +1,18 @@
+<html>
+<head></head>
+<body>
+<h1>Update Post</h1>
+{{#post}}
+<form method="POST" action="/update-post/{{id}}">
+<input type="text" value="{{title}}" name="title" />
+<div>
+<input type="text" value="{{category}}" name="category" />
+</div>
+<div>
+<textarea name="body" rows="8" cols="50">{{body}}</textarea>
+</div>
+<button>Update</button>
+</form>
+{{/post}}
+</body>
+</html>
