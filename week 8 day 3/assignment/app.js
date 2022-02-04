@@ -35,8 +35,21 @@ app.post('/create-post', (req, res) => {
     })
     post.save().then(() => {
         res.redirect('/')
+    }).catch(error => {
+        res.render('create-post', { errorMessage: 'Unable to save post!' })
     })
 })
+
+// ASYNC and AWAIT
+
+// also add async before (req, res)
+// // save movie using async/await 
+// try {
+//     let savedMovie = await movie.save()
+//     res.redirect('/')
+// } catch(error) {
+//     res.render('add-movie', {errorMessage: 'Unable to save movie!'})
+// }
 
 app.get('/view-all-posts', (req, res) => {
     models.Posts.findAll({})
@@ -95,6 +108,48 @@ app.post('/filter-posts', (req, res) => {
         }
     }).then(posts => {
         res.render('index', { allPosts: posts })
+    })
+})
+
+app.post('/add-comment/:id', (req, res) => {
+    const postId = parseInt(req.params.id)
+    const title = req.body.commentTitle
+    const body = req.body.commentBody
+
+    const comment = models.Comments.build({
+        post_id: postId,
+        title: title,
+        body: body
+    })
+
+    comment.save().then(() => {
+        res.redirect(`/comments/${postId}`)
+    })
+})
+
+app.get('/comments/:id', (req, res) => {
+    const postId = parseInt(req.params.id)
+    models.Posts.findByPk(postId, {
+        include: [
+            {
+                model: models.Comments,
+                as: 'comments'
+            }
+        ]
+    }).then(post => {
+        res.render('view-comments', post.dataValues)
+    })
+})
+
+app.post('/delete-comment/:id', (req, res) => {
+    const id = parseInt(req.params.id)
+    const postId = parseInt(req.body.post_id)
+    models.Comments.destroy({
+        where: {
+            id: id
+        }
+    }).then(() => {
+        res.redirect(`/comments/${postId}`)
     })
 })
 

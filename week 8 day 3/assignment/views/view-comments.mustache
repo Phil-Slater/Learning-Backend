@@ -1,0 +1,38 @@
+<html>
+<head></head>
+<body>
+<h1>View Comments</h1>
+<h2>Title: {{title}}</h2>
+<h4>Category: {{category}}</h4>
+<p>{{body}}</p>
+<p>Last updated: {{updatedAt}}</p>
+<p>Date created: {{createdAt}}</p>
+
+<hr>
+{{#comments}}
+<h4>Comment Title: {{title}}</h4>
+<p>{{body}}</p>
+<p>Date created: {{createdAt}}</p>
+<form method="POST" action="/delete-comment/{{id}}">
+<input type="hidden" name="post_id" value="{{post_id}}"/>
+<button>Delete Comment</button>
+</form>
+<hr>
+{{/comments}}
+
+<h2>Add a Comment:</h2>
+<form method="POST" action="/add-comment/{{id}}">
+<input type="text" placeholder="Comment Title" name="commentTitle"/>
+<div>
+<textarea name="commentBody" rows="4" cols="50"></textarea>
+</div>
+<button>Submit Comment</button>
+</form>
+<hr>
+<form method="GET" action="/">
+<button>Go Home</button>
+</form>
+
+
+</body>
+</html>

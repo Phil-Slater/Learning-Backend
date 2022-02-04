@@ -13,6 +13,18 @@
 </div>
 <button>Update</button>
 </form>
+
+<h2>Add a Comment:</h2>
+<form method="POST" action="/add-comment/{{id}}">
+<input type="text" placeholder="Comment Title" name="commentTitle"/>
+<div>
+<textarea name="commentBody" rows="4" cols="50"></textarea>
+</div>
+<button>Submit Comment</button>
+</form>
+
 {{/post}}
+
+
 </body>
 </html>
